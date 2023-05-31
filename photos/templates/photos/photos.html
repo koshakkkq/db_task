@@ -4,9 +4,9 @@
 {% for post in photos %}
 
 <div style="clear: both; margin: 0px" >
-    <h1>{{post.title}} | АВТОР: {{post.user.email}}</h1>
+    <h1>{{post.title}} | АВТОР: {{post.username}} | Локация: {{post.location}} | Дата: {{post.post_date}}</h1>
     {% if post.img %}
-    <p><img src="{{post.img.url}}" align="left" height="200px" >{{post.description|linebreaks}}</p>
+    <p><img src="{{post.img}}" align="left" height="200px" >{{post.description|linebreaks}}</p>
     {% endif %}
 </div>
 <hr>
@@ -19,6 +19,7 @@
 <div>Комментарии: </div>
 <hr>
 {% for comment in comments %}
+Автор: {{comment.user}}<br>
 <div style="padding-top: 10px">{{comment.content}}</div>
 <hr>
 {% endfor %}
@@ -33,10 +34,9 @@
 
     <div class="form-error">{{ form.non_field_errors }}</div>
 
-{% for f in form %}
-	<p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
-	<div class="form-error">{{ f.errors }}</div>
-{% endfor %}
+    <p><label class="form-label" for="content">Комментарий: </label><input type="text" id = "content" name="content" required></p>
+    <div class="form-error">{{ f.errors }}</div>
+
     <button type="submit">Добавить</button>
 </form>
 </div>

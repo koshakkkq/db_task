@@ -47,5 +47,5 @@ class PhotoTag(models.Model):
 class Comment(models.Model):
 	album = models.ForeignKey('album', on_delete=models.PROTECT)
 	content = models.CharField(max_length=255)
-
+	user = models.ForeignKey('auth.User', on_delete=models.PROTECT, default=1)
 

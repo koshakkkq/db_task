@@ -1,0 +1,14 @@
+
+CREATE TABLE "photos_album" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "description" varchar(255) NOT NULL);
+
+CREATE TABLE "photos_location" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(255) NOT NULL, "latitude" real NOT NULL, "longitude" real NOT NULL);
+
+CREATE TABLE "photos_photo" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(255) NOT NULL, "description" varchar(255) NOT NULL, "upload_date" datetime NOT NULL, "img" varchar(100) NOT NULL, "album_id" bigint NO
+T NULL REFERENCES "photos_album" ("id") DEFERRABLE INITIALLY DEFERRED, "location_id" bigint NOT NULL REFERENCES "photos_location" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE TABLE "photos_tag" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "description" varchar(255) NOT NULL);
+
+CREATE TABLE "photos_phototag" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "photo_id" bigint NOT NULL REFERENCES "photos_photo" ("id") DEFERRABLE INITIALLY DEFERRED, "tag_id" bigint NOT NULL REFERENCES "photos_tag" ("id") 
+DEFERRABLE INITIALLY DEFERRED);
+
+CREATE TABLE "photos_comment" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content" varchar(255) NOT NULL, "album_id" bigint NOT NULL REFERENCES "photos_album" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED);

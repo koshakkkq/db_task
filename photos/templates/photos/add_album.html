@@ -1,0 +1,23 @@
+{% extends 'photos/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<form action="{% url post_url %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    <p><label class="form-label" for="description">Название: </label><input type="text" id = "description" name="content" required></p>
+    <div class="form-error">{{ f.errors }}</div>
+
+    <button type="submit">Добавить</button>
+</form>
+
+
+
+
+
+
+
+{% endblock %}
